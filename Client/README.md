@@ -15,7 +15,7 @@ Aplikace by měl být schopná handlovat vyjímky vyhozené API serverem aniž b
 
 Na grafickém zpracování nezáleží. Použijte svojí oblíbenou knihovnu, vlastní stylování, nebo použite nenastylované elementy. Pokud řešíte pouze klientskou část s placeholder daty, záleží i na grafickém zpracování.
 
-_Bonusové body:_
+**Bonusové body:**
 
 - Použít TypeScript
 - Použít React

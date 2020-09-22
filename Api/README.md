@@ -12,7 +12,7 @@ V případě, že jsou nějaká data poškozená (seznam na konci tohoto souboru
 
 Pokud nechcete použít REST, zajistěte ekvivalentní funkcionalitu.
 
-_Bonusové body:_
+**Bonusové body:**
 
 - Pokrýt kód část unit testy
 - Přidat logování přístupu do jednotlivých repositářů skrze AOP
@@ -60,7 +60,7 @@ Implementace:
 
 ### Problémy s daty
 
-- _Řad indosamentů pro směnku Id=8 obsahuje je zacyklený (z Id=13 vede na Id=70 -> což dojde až k Id=13)_
+- **Řad indosamentů pro směnku Id=8 obsahuje je zacyklený (z Id=13 vede na Id=70 -> což dojde až k Id=13)**
 - Směnka Id=2 má stejného DrawerId=13 jako BeneficiaryId=13 (tj. směnku vystavuje sám sobě)
 - Řad indosamentů pro směnku Id=10 obsahuje 2x indosament s null předchozím (Id=5 a Id=10).
 - První v řadu indosantů pro směnku Id=4 zaručeně (mohou být i další případy) dává NewBeneficiaryId=13 stejné jako BeneficiaryId=13 (tj. směnku postupuje sám sobě)
