@@ -1,7 +1,6 @@
 # Směnky
 
-[API](API) - část zaměřená na .NET
-
+[API](API) - část zaměřená na .NET\
 [Klientská aplikace](Client) - část zaměřená na práci s webovým prohlížečem a JavaScriptem
 
 ## BE
