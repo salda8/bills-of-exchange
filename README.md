@@ -17,6 +17,6 @@ V případě jakýkolich otázek, či problémů: lukas.prochazka3@cts-tradeit.c
 
 Protože je úloha stylizována do prostředí investičního bankovnictví, dávám slovníček některých pojmů které se používají:
 
-- Směnka (aj. Bill of Exchange) - cenný papír kterým se vystavující zavazuje splnit dluh na směnce uveděný, je-li mu směnka předložena
-- Rubopis nebo Indosament (aj. Endorsement) - poznámka na směnce, kterou osoba v jejíchž prospěch je směnka uvedena může tuto směnku předat dalšímu (tento další poté může poté vystaviteli předložit směnku)
+- Směnka (an. Bill of Exchange) - cenný papír kterým se vystavující zavazuje splnit dluh na směnce uveděný, je-li mu směnka předložena
+- Rubopis nebo Indosament (an. Endorsement) - poznámka na směnce, kterou osoba v jejíchž prospěch je směnka uvedena může tuto směnku předat dalšímu (tento další poté může poté vystaviteli předložit směnku)
 - Řad - u směnek na řad (v této úloze všechny směnky) se jedná o pořadí rubopisů (tj. seznam těch, jejichž rukama směnka prošla)
