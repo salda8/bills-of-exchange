@@ -2,7 +2,7 @@
 
 Vaším úkolem je dokončit každou z částí.
 
-[API](API) - část zaměřená na .NET\
+[API](Api) - část zaměřená na .NET\
 [Klient](Client) - část zaměřená na práci s webovým prohlížečem a JavaScriptem
 
 Jednotlivé problémy můžete řešit na libovolných úrovních aplikace (tam kde uznáte za vhodné). Důležité je, aby řešení bylo funkční, či aby jeho některá část byla funkční. Můžete vyřešit čistě API nebo Klientskou část (chcete-li řešit pouze klientskou část bez komunikace s API serverem, použijte vlastní placeholder data).
