@@ -6,7 +6,7 @@ Klientská aplikace musí umožnit následující:
 
 - Zvolit si ze seznamu danou osobu (stránkovaně) a zobrazit si její detail
 - Zvolit si ze seznamu danou směnku (stránkovaně) a zobrazit si její detail
-- Na detailu osoby zobrazit všechny směnky, které vystavila a všechny směnky které má právě u sebe (tj. kdy je posledním beneficientem)
+- Na detailu osoby zobrazit všechny směnky, které vystavila a všechny směnky které má právě u sebe (tj. kdy je posledním beneficientem, tedy je buď přímo na směnce nebo posledním rubopisu)
 - Na detailu směnky zobrazit kompletní řad a jejího vystavitele
 - Z detailu osoby přejít na detail směnky
 - Z detailu směnky přejít na detail osoby
