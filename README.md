@@ -17,6 +17,22 @@ V případě jakýkolich otázek, či problémů: lukas.prochazka3@cts-tradeit.c
 
 Protože je úloha stylizována do prostředí investičního bankovnictví, dávám slovníček některých pojmů které se zde používají:
 
-- Směnka (an. Bill of Exchange) - cenný papír kterým se vystavující zavazuje splnit dluh na směnce uveděný, je-li mu směnka předložena.
-- Rubopis nebo Indosament (an. Endorsement) - poznámka na směnce, kterou osoba v jejíchž prospěch je směnka uvedena může tuto směnku předat dalšímu (tento další poté může poté vystaviteli předložit směnku)
-- Řad - u směnek na řad (v této úloze všechny směnky) se jedná o pořadí rubopisů (tj. seznam těch, jejichž rukama směnka prošla)
+### Směnka (an. Bill of Exchange)
+
+Cenný papír kterým se vystavující zavazuje splnit dluh na směnce uveděný, je-li mu směnka předložena.
+
+Např.: "Vystavil-li Petr směnku na 500 Kč Davidovi. Může David vráti směnku Petrovi a žádat daný finanční obnos."
+
+### Rubopis neboli Indosament (an. Endorsement)
+
+Poznámka napsaná na rubu směnky, kterou lze směnku převést na dalšího. Nový vlastník směnky poté může směnku vyměnit s vystavitelem směnky za nějaké plnění.
+
+Např. "Chce-li David předat Martinovi směnku od Petra, napíše na její rub, že ji předává Martinovi. Martin pak může po Petrovi po předložení žádat oněch 500 Kč."
+
+### Řad
+
+Rubopisy společně tvoří řad, tedy nějaké pořadí osob skrze něž směnka putovala. Ten kdo je v řadu na konci, ten může směnku předložit vystaviteli. Rubopisy v řadu fungují jako **linked list**. Aby byl poslední na řadu skutečný vlastník směnky, musí být všechny rubopisy společně vytvořit konzistentní seznam až k první osobě, v jejíž prospěch byla směnka vystavena.
+
+Např. "Chce-li Martin předat směnku Janovi. Poznamená opět předání na rub směnky. Nyní řad směnky vypadá David->Martin->Jan".
+
+Pokud by se směnku na dalšího snažil předat někdo, kdo není v řadu na konci, bude předání neplatné.
