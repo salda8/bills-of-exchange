@@ -1,5 +1,25 @@
 # Směnky API
 
+Vaším úkolem je dokončit API server tak, aby poskytoval potřebná data pro klientskou část. Doplňte endpointy pro načtení:
+
+- seznam všech osob (stránkovaný)
+- seznam všech směnek (stránkovaný)
+- úplného řadu danou směnku (tj. všechny rubopisy na dané směnce)
+- seznamu všech směnek které daná osoba vypsala
+- seznamu všech směnek z kterých má daná osoba prospěch (tj. těch kdy je aktuální beneficient)
+
+V případě, že jsou nějaká data poškozená (seznam na konci tohoto souboru), vyhoďte vyjímku s informací o daném problému s daty.
+
+Pokud nechcete použít REST, zajistěte ekvivalentní funkcionalitu.
+
+_Bonusové body:_
+
+- Pokrýt kód část unit testy
+- Přidat logování přístupu do jednotlivých repositářů skrze AOP
+- Správně dostát principům SOLID
+
+## Co zde již je
+
 Nachází se zde 4 projekty:
 
 - BillsOfExchange - webová aplikace
@@ -9,9 +29,9 @@ Nachází se zde 4 projekty:
 
 Můžete přidat libovolný počet dalších projektů. Neupravujte pouze DataProvider a jeho obsah. Typy z DataProvideru můžete rozšiřovat skrze dědičnost.
 
-## BillsOfExchange.DataProvider
+### BillsOfExchange.DataProvider
 
-### Model
+#### Model
 
 Tato sekce obsahuje vysvětlení datových tříd a některých členů
 
@@ -24,7 +44,7 @@ Tato sekce obsahuje vysvětlení datových tříd a některých členů
   - NewBeneficiaryId - nová osoba, v jejíchž prospěch plyne ze měnky právo
   - PreviousEndorsementId - odkaz na předchozí část rubopisu (null pro první zápis rubopisu ke směnce)
 
-### Repositář
+#### Repositář
 
 Rozhraní:
 
@@ -38,7 +58,7 @@ Implementace:
 - PartyRepository
 - BillOfExchangeRepository
 
-## Poznámky k datům
+### Problémy s daty
 
 - _Řad indosamentů pro směnku Id=8 obsahuje je zacyklený (z Id=13 vede na Id=70 -> což dojde až k Id=13)_
 - Směnka Id=2 má stejného DrawerId=13 jako BeneficiaryId=13 (tj. směnku vystavuje sám sobě)
