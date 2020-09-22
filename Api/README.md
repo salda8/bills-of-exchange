@@ -4,7 +4,7 @@ Vaším úkolem je dokončit API server tak, aby poskytoval potřebná data pro 
 
 - seznam všech osob (stránkovaný)
 - seznam všech směnek (stránkovaný)
-- úplného řadu danou směnku (tj. všechny rubopisy na dané směnce)
+- úplného řadu danou směnku (tj. všechny rubopisy na dané směnce, seřazené)
 - seznam všech směnek které daná osoba vystavila
 - seznam všech směnek které daná osoba vlastní (tj. je v poslední beneficient)
 
