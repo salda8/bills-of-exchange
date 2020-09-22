@@ -1,6 +1,6 @@
-# Směnky BE
+# Směnky API
 
-Nachází se zde zatím 4 projekty:
+Nachází se zde 4 projekty:
 
 - BillsOfExchange - webová aplikace
 - BillsOfExchange.Tests - prázdný projekt pro unit testy
