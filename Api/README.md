@@ -17,12 +17,12 @@ Tato sekce obsahuje vysvětlení datových tříd a některých členů
 
 - Party - reprezentuje nějakou osobu (může být buď tím kdo směnku vystavil, nebo ten v jehož prospěch byla vystavena)
 - BillOfExchange - reprezentuje směnku
-- - DrawerId - osoba, jež směnku vystavila
-- - BeneficiaryId - osoba, v jejíchž prospěch byla směnka vystavena
+  - DrawerId - osoba, jež směnku vystavila
+  - BeneficiaryId - osoba, v jejíchž prospěch byla směnka vystavena
 - Endosament - reprezentuje rubopis/indosament, respektive zápis v něm, což je dodatečná informace skrze kterou může ten, v jehož prospěch je směnka vystavena, tuto směnku předat další osobě
-- - BillId - směnka k níž se rubopis váže
-- - NewBeneficiaryId - nová osoba, v jejíchž prospěch plyne ze měnky právo
-- - PreviousEndorsementId - odkaz na předchozí část rubopisu (null pro první zápis rubopisu ke směnce)
+  - BillId - směnka k níž se rubopis váže
+  - NewBeneficiaryId - nová osoba, v jejíchž prospěch plyne ze měnky právo
+  - PreviousEndorsementId - odkaz na předchozí část rubopisu (null pro první zápis rubopisu ke směnce)
 
 ### Repositář
 
