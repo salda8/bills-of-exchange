@@ -1,0 +1,16 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=29772a9a_002D328c_002D4072_002D8f03_002D45d54f45a3e4/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EndorsementRepository_Get" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;Or&gt;&#xD;
+      &lt;TestAncestor&gt;&#xD;
+        &lt;TestId&gt;NUnit3x::220DEADC-FAF4-4AC5-AA59-C04EC59726CF::.NETCoreApp,Version=v3.1::BillsOfExchange.DataProvider.Tests.EndorsementRepositoryTests&lt;/TestId&gt;&#xD;
+      &lt;/TestAncestor&gt;&#xD;
+      &lt;TestAncestor&gt;&#xD;
+        &lt;TestId&gt;NUnit3x::220DEADC-FAF4-4AC5-AA59-C04EC59726CF::.NETCoreApp,Version=v3.1::BillsOfExchange.DataProvider.Tests.PartyRepositoryTests&lt;/TestId&gt;&#xD;
+      &lt;/TestAncestor&gt;&#xD;
+    &lt;/Or&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::220DEADC-FAF4-4AC5-AA59-C04EC59726CF::.NETCoreApp,Version=v3.1::BillsOfExchange.DataProvider.Tests.BillOfExchangeTests&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
