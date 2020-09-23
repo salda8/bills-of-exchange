@@ -2,8 +2,8 @@
 
 Vaším úkolem je dokončit API server tak, aby poskytoval potřebná data pro klientskou část. Doplňte endpointy pro načtení:
 
-- seznam všech osob (stránkovaný)
-- seznam všech směnek (stránkovaný)
+- seznam všech osob (ideálně stránkovaný)
+- seznam všech směnek (ideálně stránkovaný)
 - úplného řadu danou směnku (tj. všechny rubopisy na dané směnce, seřazené)
 - seznam všech směnek které daná osoba vystavila
 - seznam všech směnek které daná osoba vlastní (tj. je v poslední beneficient)
@@ -39,6 +39,7 @@ V aplikace se nachází 3 základní datové třídy
 - BillOfExchange - reprezentuje směnku
 - Endorsement - reprezentuje rubopis (tj. nástroj kterým se převádí směnka na dalšího vlastníka)
 
+\
 ![model](api_model.png)
 
 #### Repositář

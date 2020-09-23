@@ -4,12 +4,22 @@ Vaším úkolem je dokončit vytvořit klientskou aplikaci. Pro spouštění pou
 
 Klientská aplikace musí umožnit následující:
 
-- Zvolit si ze seznamu danou osobu (stránkovaně) a zobrazit si její detail
-- Zvolit si ze seznamu danou směnku (stránkovaně) a zobrazit si její detail
-- Na detailu osoby zobrazit všechny směnky, které vystavila a všechny směnky které má právě u sebe (tj. kdy je posledním beneficientem, tedy je buď přímo na směnce nebo posledním rubopisu)
-- Na detailu směnky zobrazit kompletní řad a jejího vystavitele
-- Z detailu osoby přejít na detail směnky
-- Z detailu směnky přejít na detail osoby
+Navigace:
+
+- Zvolit si ze seznamu danou osobu (ideálně stránkovaně)
+- Zvolit si ze seznamu danou směnku (ideálně stránkovaně)
+
+Detail osoby:
+
+- Vypsat všechny směnky, které daná osoba vystavila
+- Vypsat všechny směnky, které daná osoba právě vlastní (tj. je první v řadu)
+- Proklik na detail směnky skrze danou směnku
+
+Detail směnky:
+
+- Zobrazit směnce jako takové (vystavitel, první vlastník a současný vlastník)
+- Zobrazit kompletní řad směnky (tj. všechny rubopisy jak jdou po sobě) **včetně jmen osob**
+- Proklik na detail soboy skrze zmíněnou osobu
 
 Aplikace by měl být schopná handlovat vyjímky vyhozené API serverem aniž by došlo k jejím pádu.
 
@@ -21,3 +31,7 @@ Na grafickém zpracování nezáleží. Použijte svojí oblíbenou knihovnu, vl
 - Použít React
 - Pokrýt kód unit testy
 - Zajistit aby při opuštění a návratu mohl uživatel pokračovat tam, kde skončil
+
+## Co zde již je
+
+Je zde připravený webpack dev server a příkaz `npm run start`.

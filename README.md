@@ -23,7 +23,7 @@ Protože je úloha stylizována do prostředí investičního bankovnictví, dá
 
 Cenný papír kterým se vystavující zavazuje splnit dluh na směnce uveděný, je-li mu směnka předložena.
 
-Např.: "Vystavil-li Petr směnku na 500 Kč Davidovi. Může David vráti směnku Petrovi a žádat daný finanční obnos."
+Např.: "Vystavil-li Petr směnku na 500 Kč Davidovi. Nyní může David vrátit směnku Petrovi a žádat daný finanční obnos."
 
 ### Rubopis neboli Indosament (an. Endorsement)
 
