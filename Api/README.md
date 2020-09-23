@@ -16,7 +16,7 @@ Pokud nechcete použít REST, zajistěte ekvivalentní funkcionalitu.
 
 - Pokrýt kód část unit testy
 - Přidat logování HTTP requestů
-- Přidat logování přístupu do jednotlivých repositářů skrze AOP
+- Přidat logování přístupu do jednotlivých repositářů skrze AOP (logování metod)
 
 ## Co zde již je
 
