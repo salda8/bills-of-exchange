@@ -8,7 +8,7 @@ Vaším úkolem je dokončit API server tak, aby poskytoval potřebná data pro 
 - seznam všech směnek které daná osoba vystavila
 - seznam všech směnek které daná osoba vlastní (tj. je v poslední beneficient)
 
-V případě, že jsou nějaká data poškozená (seznam na konci tohoto souboru), vyhoďte vyjímku s informací o daném problému s daty.
+**V případě, že jsou nějaká data poškozená (seznam na konci tohoto souboru), vyhoďte vyjímku s informací o daném problému s daty.**
 
 Pokud nechcete použít REST, zajistěte ekvivalentní funkcionalitu.
 
@@ -33,16 +33,13 @@ Můžete přidat libovolný počet dalších projektů. Neupravujte pouze DataPr
 
 #### Model
 
-Tato sekce obsahuje vysvětlení datových tříd a některých členů
+V aplikace se nachází 3 základní datové třídy
 
-- Party - reprezentuje nějakou osobu (může být buď tím kdo směnku vystavil, nebo ten v jehož prospěch byla vystavena)
+- Party - reprezentuje nějakou osobu (může být buď tím kdo směnku vystavil, nebo její vlastník)
 - BillOfExchange - reprezentuje směnku
-  - DrawerId - osoba, jež směnku vystavila
-  - BeneficiaryId - osoba, v jejíchž prospěch byla směnka vystavena
-- Endorsement - reprezentuje rubopis/indosament, respektive zápis v něm, což je dodatečná informace skrze kterou může ten, v jehož prospěch je směnka vystavena, tuto směnku předat další osobě.
-  - BillId - směnka k níž se rubopis váže
-  - NewBeneficiaryId - nová osoba, v jejíchž prospěch plyne ze měnky právo
-  - PreviousEndorsementId - odkaz na předchozí část rubopisu (null pro první zápis rubopisu ke směnce)
+- Endorsement - reprezentuje rubopis (tj. nástroj kterým se převádí směnka na dalšího vlastníka)
+
+![model](api_model.png)
 
 #### Repositář
 
@@ -60,7 +57,7 @@ Implementace:
 
 ### Problémy s daty
 
-- **Řad indosamentů pro směnku Id=8 je zacyklený (z Id=13 vede na Id=70 -> což dojde až k Id=13)**
+- **Řad rubopisů pro směnku Id=8 je zacyklený (z Id=13 vede na Id=70 -> což dojde až k Id=13)**
 - Směnka Id=2 má stejného DrawerId=13 jako BeneficiaryId=13 (tj. směnku vystavuje sám sobě)
 - Řad indosamentů pro směnku Id=10 obsahuje 2x indosament s null předchozím (Id=5 a Id=10).
 - První v řadu indosantů pro směnku Id=4 zaručeně (mohou být i další případy) dává NewBeneficiaryId=13 stejné jako BeneficiaryId=13 (tj. směnku postupuje sám sobě)

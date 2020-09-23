@@ -15,6 +15,8 @@ V případě jakýkolich otázek, či problémů: lukas.prochazka3@cts-tradeit.c
 
 ## Slovníček
 
+Diagram modelů se nachází v části [API](Api)
+
 Protože je úloha stylizována do prostředí investičního bankovnictví, dávám slovníček některých pojmů které se zde používají:
 
 ### Směnka (an. Bill of Exchange)
@@ -25,14 +27,14 @@ Např.: "Vystavil-li Petr směnku na 500 Kč Davidovi. Může David vráti směn
 
 ### Rubopis neboli Indosament (an. Endorsement)
 
-Poznámka napsaná na rubu směnky, kterou lze směnku převést na dalšího. Nový vlastník směnky poté může směnku vyměnit s vystavitelem směnky za nějaké plnění.
+Poznámka napsaná na rubu směnky, kterou lze směnku převést na dalšího. Nový vlastník směnky poté může směnku vyměnit s výstavcem směnky za nějaké plnění.
 
 Např. "Chce-li David předat Martinovi směnku od Petra, napíše na její rub, že ji předává Martinovi. Martin pak může po Petrovi po předložení žádat oněch 500 Kč."
 
 ### Řad
 
-Rubopisy společně tvoří řad, tedy nějaké pořadí osob skrze něž směnka putovala. Ten kdo je v řadu na konci, ten může směnku předložit vystaviteli. Rubopisy v řadu fungují jako **linked list**. Aby byl poslední na řadu skutečný vlastník směnky, musí být všechny rubopisy společně vytvořit konzistentní seznam až k první osobě, v jejíž prospěch byla směnka vystavena.
+Rubopisy společně tvoří řad, tedy nějaké pořadí osob skrze něž směnka putovala. Ten kdo je v řadu první, je jejím vlastníkem a může směnku předložit výstavci. Rubopisy v řadu fungují jako **linked list**. Aby byl první v řadu skutečný vlastník směnky, musí být všechny rubopisy společně vytvořit konzistentní seznam až k prvnímu vlastníku směnky.
 
 Např. "Chce-li Martin předat směnku Janovi. Poznamená opět předání na rub směnky. Nyní řad směnky vypadá David->Martin->Jan".
 
-Pokud by se směnku na dalšího snažil předat někdo, kdo není v řadu na konci, bude předání neplatné.
+Pokud by se směnku na dalšího snažil předat někdo, kdo není v řadu první, bude předání neplatné.
