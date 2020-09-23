@@ -9,7 +9,7 @@ Jednotlivé problémy můžete řešit na libovolných úrovních aplikace (tam 
 
 Každá část obsahuje seznam bonusových úkolů, které nemusíte splnit.
 
-Finální řešení zašlete zpět formou pull requestu.
+Pro vaše řešení si vytvořte vlastní větev se jménem ve formátu "datum pohovoru"/"vaše jméno"
 
 V případě jakýkolich otázek, či problémů: lukas.prochazka3@cts-tradeit.cz
 
