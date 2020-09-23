@@ -15,8 +15,8 @@ Pokud nechcete použít REST, zajistěte ekvivalentní funkcionalitu.
 **Bonusové body:**
 
 - Pokrýt kód část unit testy
+- Přidat logování HTTP requestů
 - Přidat logování přístupu do jednotlivých repositářů skrze AOP
-- Správně dostát principům SOLID
 
 ## Co zde již je
 
