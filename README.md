@@ -15,9 +15,9 @@ V případě jakýkolich otázek, či problémů: lukas.prochazka3@cts-tradeit.c
 
 ## Slovníček
 
-Diagram modelů se nachází v části [API](Api)
+Diagram entit a jejich vztahů se nachází v části [API](Api)
 
-Protože je úloha stylizována do prostředí investičního bankovnictví, dávám slovníček některých pojmů které se zde používají:
+Protože je úloha stylizována do tématiky cenných papírů, dávám slovníček některých pojmů které se zde používají:
 
 ### Směnka (an. Bill of Exchange)
 
