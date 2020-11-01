@@ -9,7 +9,9 @@ Jednotlivé problémy můžete řešit na libovolných úrovních aplikace (tam 
 
 Každá část obsahuje seznam bonusových úkolů, které nemusíte splnit.
 
-Pro vaše řešení si vytvořte vlastní větev se jménem ve formátu "datum pohovoru"/"vaše jméno"
+Pro vaše řešení si vytvořte vlastní větev se jménem ve formátu "datum pohovoru"/"vaše jméno" (pro pushování větví je nutné být kolaborátorem na repozitáři, po kontaktu s HR obdržíte na e-mail pozvánku).
+
+Pokud ještě nejste v kontaktu s HR a i tak chcete úlohu vypracovat, udělejte si na GitHubu fork repozitáře a řešení submitněte pull requestem.
 
 V případě jakýkolich otázek, či problémů: lukas.prochazka3@cts-tradeit.cz
 
@@ -27,7 +29,7 @@ Např.: "Vystavil-li Petr směnku na 500 Kč Davidovi. Nyní může David vráti
 
 ### Rubopis neboli Indosament (an. Endorsement)
 
-Poznámka napsaná na rubu směnky, kterou lze směnku převést na dalšího. Nový vlastník směnky poté může směnku vyměnit s výstavcem směnky za nějaké plnění.
+Poznámka napsaná na rubu směnky, kterou lze směnku převést na dalšího. Nový vlastník směnky poté může směnku vyměnit s výstavcem směnky za nějaké plnění. Tedy poznámka na rub směnky je nutná aby předání bylo platné.
 
 Např. "Chce-li David předat Martinovi směnku od Petra, napíše na její rub, že ji předává Martinovi. Martin pak může po Petrovi po předložení žádat oněch 500 Kč."
 
