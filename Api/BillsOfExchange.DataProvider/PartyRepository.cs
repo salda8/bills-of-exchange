@@ -10,7 +10,7 @@ namespace BillsOfExchange.DataProvider
 {
     public class PartyRepository: IPartyRepository
     {
-        private static readonly Lazy<Party[]> _parties = new Lazy<Party[]>(() =>
+        protected static readonly Lazy<Party[]> _parties = new Lazy<Party[]>(() =>
         {
             string json = File.ReadAllText("Data/Parties.json");
             return JsonConvert.DeserializeObject<IEnumerable<Party>>(json).OrderBy(item => item.Id).ToArray();

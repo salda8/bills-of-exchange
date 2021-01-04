@@ -10,7 +10,7 @@ namespace BillsOfExchange.DataProvider
 {
     public class EndorsementRepository: IEndorsementRepository
     {
-        private static readonly Lazy<Endorsement[]> _endorsements = new Lazy<Endorsement[]>(() =>
+        protected static readonly Lazy<Endorsement[]> _endorsements = new Lazy<Endorsement[]>(() =>
         {
             string json = File.ReadAllText("Data/Endorsements.json");
             return JsonConvert.DeserializeObject<IEnumerable<Endorsement>>(json).ToArray();

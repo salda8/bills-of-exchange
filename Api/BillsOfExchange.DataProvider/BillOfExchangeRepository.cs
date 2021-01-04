@@ -10,7 +10,7 @@ namespace BillsOfExchange.DataProvider
 {
     public class BillOfExchangeRepository: IBillOfExchangeRepository
     {
-        private static readonly Lazy<BillOfExchange[]> _billsOfExchange = new Lazy<BillOfExchange[]>(() =>
+        protected static readonly Lazy<BillOfExchange[]> _billsOfExchange = new Lazy<BillOfExchange[]>(() =>
         {
             string json = File.ReadAllText("Data/BillsOfExchange.json");
             return JsonConvert.DeserializeObject<IEnumerable<BillOfExchange>>(json).OrderBy(item => item.Id).ToArray();
