@@ -8,7 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace BillsOfExchange.Controllers
-{
+{/*
+  * Nekdo mi po telefonu rekl ze je to cele na 3 hodiny samozrejme jsem si to 
+  * nechal na dnesek rano ale za 3 hodiny se to cele neda zvladnout, udelal jsem zatim prvni polovinu ale bohuzel nemuzu pokracovat...
+  * mohl bych udelat klientskou cast ve stredu a tohle jeste trochu poladit nicmene je to funkcni vcetne tech bonusovych bodu... O.M.
+  */
     [ApiController]
     [Route("[controller]")]
     public class BillsOfExchangeController : BaseController
