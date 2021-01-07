@@ -1,0 +1,9 @@
+﻿@import 'base/variables.scss';
+/* NPM package styles */
+@import '~bulma/bulma';
+@import '~react-toastify/scss/main.scss'; 
+
+/* Local styles */
+@import 'base/generic.scss';
+@import 'components/navbar.scss';
+@import 'components/tool-tip.scss';

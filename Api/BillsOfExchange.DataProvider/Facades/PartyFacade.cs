@@ -13,5 +13,10 @@ namespace BillsOfExchange.DataProvider.Facades
         {
             return PagingList<Party>.ToPagingdList(_parties.Value.AsQueryable(), page, size);
         }
+
+        public Party GetOne(int id)
+        {
+            return _parties.Value.Single(a => a.Id == id);
+        }
     }
 }

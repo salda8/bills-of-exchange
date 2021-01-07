@@ -10,5 +10,9 @@ namespace BillsOfExchange.Models.Responses
     {
         public IEnumerable<Endorsement> Endorsements { get; set; }
         public BillOfExchange Bill { get; set; }
+
+        public Party Beneficary { get; set; }
+
+        public Party Drawer { get; set; }
     }
 }
