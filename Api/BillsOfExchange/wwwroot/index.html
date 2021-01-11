@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Bills of Exchange</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+</head>
+
+
+
+<body data-page="/">
+
+
+    <ul>
+        <li><a href="#/parties">parties</a></li>
+        <li><a href="#/bills">bills</a></li>
+    </ul>
+
+    <section id="parties" class="nav" data-number="1" data-url="api/Party/Get?page="
+             data-page="#/parties-" data-state="" data-detail="/partyDetail-">
+
+        <a class="prev pag" href="">Prev</a>
+        <a class="next pag" href="">Next</a>
+        <table id="parties">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </section>
+
+
+
+    <section id="bills" class="nav" data-number="1" data-url="api/BillsOfExchange/Get?page="
+             data-page="#/bills-" data-state="" data-detail="/billDetail-">
+        <a class="prev pag">Prev</a>
+        <a class="next pag">Next</a>
+        <table id="parties">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </section>
+
+    <section id="billDetail" class="nav" data-number="" data-url="api/BillsOfExchange/Detail?billId=">
+        <p></p>
+        <ol>
+        </ol>
+    </section>
+
+    <section id="partyDetail" class="nav" data-number="" data-url="api/Party/Detail?partyId=">
+        <p></p>
+        <h2>original</h2>
+        <ol id="d-original"></ol>
+        <h2>actual</h2>
+        <ol id="d-actual"></ol>
+    </section>
+
+    <div id="error">
+        <p id="errorText"></p>
+    </div>
+
+    <style>
+
+        .nav, button {
+            display: none;
+        }
+
+        table tbody tr:hover {
+            cursor: pointer;
+            background-color: yellowgreen;
+            box-shadow: 5px 10px #888888;
+        }
+    </style>
+
+    <script>
+
+        function router() {
+            $('#errorText').html('');
+            var pages = ['bills', 'parties', 'partyDetail', 'billDetail'];
+            var page = window.location.hash;
+
+            var url = page.substring(2);
+
+            for (var a = 0; a < pages.length; a++) {
+                if (url == pages[a] || url.startsWith(pages[a])) {
+                    var urlValues = url.split("-", 2);
+                    if (urlValues.length > 2) {
+                        errorPageIsntExist();
+                        return false;
+                    }
+
+                    if (!pages.includes(urlValues[0])) {
+                        errorPageIsntExist();
+                        return false;
+                }
+
+                    console.log('#' + urlValues[0]);
+                    var section = $('#' + urlValues[0]);
+                    if (!section.length) {
+                        errorPageIsntExist();
+                        return false;
+                    }
+
+                    var numberInt = 0;
+                    if (urlValues.length == 2)
+                        numberInt = parseInt(urlValues[1]);
+
+                    if (url.endsWith('Detail')) {
+                        if (numberInt == 0) {
+                            errorPageIsntExist();
+                            return false;
+                        }
+                    }
+
+                    hideAll();
+
+                    if (numberInt == 0 && section.attr('data-state') != '' && section.attr('data-state') != url) {
+
+                        var redirectUrl = section.attr('data-state');
+                        section.attr('data-state', redirectUrl);
+
+                        window.location.hash = '/' + redirectUrl;
+                        return true;
+                    }
+
+                    localStorage.setItem("lastUrl", url);
+
+                    if (numberInt == 0)
+                        numberInt = 1;
+
+                    section.attr('data-number', numberInt);
+                    section.attr('data-state', url);
+
+
+                    section.show();
+                    if (typeof window[urlValues[0]] === 'function')
+                        window[urlValues[0]](section);
+
+                    return true;
+                }
+            }
+
+            var lastUrl = localStorage.getItem("lastUrl");
+            if (lastUrl != null) {
+                window.location.hash = '/' + lastUrl;
+                return true;
+            }
+
+            return false;
+        }
+        if (!router())
+            error("error");
+
+        $(window).on("hashchange", function () {
+            if (!router())
+                error("error");
+        });
+
+        function gridPopulate(section) {
+
+            var number = parseInt(section.attr('data-number'));
+
+            $.getJSON(section.data('url') + number, function (data, text, req) {
+                var body = [];
+                var head = [];
+                var isFirst = true;
+                head.push('<tr>');
+                $.each(data, function (key, val) {
+
+                    body.push('<tr data-href="#' + $(section).attr('data-detail') + val[Object.keys(val)[0]] + '">');
+                    $.each(val, function (prop, value) {
+                        if (isFirst)
+                            head.push('<th>' + prop + '</th>');
+                        body.push('<td>' + value + '</td>');
+                    });
+                    body.push('</tr>');
+                    isFirst = false;
+                });
+                head.push('</tr>');
+
+                $(section).find('table tbody').html(body.join());
+                $(section).find('table thead').html(head.join());
+
+                getResponseHeaders(req);
+                var paging = $.parseJSON(req.responseHeaders['x-paging']);
+                var next = $(section).find('.next');
+                var prev = $(section).find('.prev');
+                if (paging.HasNext) {
+
+                    next.attr('href', section.data('page') + (number + 1));
+                    next.show();
+                }
+                else next.hide();
+                if (number > 1) {
+
+                    prev.attr('href', section.data('page') + (number - 1));
+                    prev.show();
+                }
+                else prev.hide();
+
+            }).fail(function () {
+                error("bad request");
+            });
+        }
+
+        function parties(section) {
+
+            gridPopulate(section);
+        }
+
+        function bills(section) {
+            gridPopulate(section);
+
+
+        }
+
+        function billDetail(section) {
+            console.log('func billDetail ');
+            var number = parseInt(section.attr('data-number'));
+            $.getJSON(section.data('url') + number, function (data, text, req) {
+
+                var info = [];
+
+                info.push('Origin bene - ');
+                info.push('<a href="#/partyDetail-' + data.beneficary.id + '">');
+                info.push(data.beneficary.name);
+                info.push('</a>');
+
+                info.push(', Origin drawer - ');
+                info.push('<a href="#/partyDetail-' + data.drawer.id + '">');
+                info.push(data.drawer.name);
+                info.push('</a>');
+                info.push(', amount - ');
+                info.push(data.bill.amount);
+
+                $(section).find('p').html(info.join());
+
+                var html = [];
+                $.each(data.endorsements, function (key, val) {
+
+
+                    html.push('<li>');
+                    html.push('Beneficary - ');
+                    html.push('<a href="#/partyDetail-' + val.bene.id + '">');
+                    html.push(val.bene.name);
+                    html.push('</a>');
+                    html.push(', Id - ');
+                    html.push(val.id);
+                    html.push('</li>');
+                });
+
+                $(section).find('ol').html(html.join());
+
+            }).fail(function (data) {
+                var errorString = [];
+                $(section).find('p').html('');
+                $(section).find('ol').html('');
+                $.each(data.responseJSON, function (prop, value) {
+                    errorString.push(prop + ' - ' + value);
+                });
+
+                error(errorString.join('<br />'));
+            });
+        }
+
+        function partyDetail(section) {
+            var number = parseInt(section.attr('data-number'));
+            $.getJSON(section.data('url') + number, function (data, text, req) {
+                $(section).find('p').html(data.name);
+
+                var original = [];
+                $.each(data.original, function (prop, value) {
+                    original.push('<li><a href="#/billDetail-' + value.id + '">');
+                    original.push('Bene: ');
+                    original.push(value.beneName);
+                    original.push(', Drawer: ');
+                    original.push(value.drawerName);
+                    original.push('</a></li>');
+                });
+
+                var actual = [];
+                $.each(data.actual, function (prop, value) {
+                    actual.push('<li><a href="#/billDetail-' + value.id + '">');
+                    actual.push('Bene: ');
+                    actual.push(value.beneName);
+                    actual.push(', Drawer: ');
+                    actual.push(value.drawerName);
+                    actual.push('</a></li>');
+                });
+
+                $('#d-original').html(original.join());
+                $('#d-actual').html(actual.join());
+                
+            }).fail(function (data) {
+                var errorString = [];
+                $(section).find('p').html('');
+                $(section).find('ol').html('');
+                $.each(data.responseJSON, function (prop, value) {
+                    errorString.push(prop + ' - ' + value);
+                });
+
+                error(errorString.join('<br />'));
+            });
+
+        }
+
+
+        function hideAll() {
+            $('section').each(function (i, v) {
+                $(this).hide();
+            });
+
+            $('.pag').each(function (i, v) {
+                $(this).hide();
+            });
+
+        }
+
+
+
+
+        function errorPageIsntExist() {
+            error('page isnt exists');
+        }
+
+
+        function error(errorText) {
+            console.log('error vole');
+            $('#errorText').html(errorText);
+            $('#errorText').show();
+        }
+
+        function getResponseHeaders(jqXHR) {
+            jqXHR.responseHeaders = {};
+            var headers = jqXHR.getAllResponseHeaders();
+            headers = headers.split("\n");
+            headers.forEach(function (header) {
+                header = header.split(": ");
+                var key = header.shift();
+                if (key.length == 0) return
+                // chrome60+ force lowercase, other browsers can be different
+                key = key.toLowerCase();
+                jqXHR.responseHeaders[key] = header.join(": ");
+            });
+        }
+
+        jQuery(document).ready(function ($) {
+
+
+            $("table tbody").on("click", "tr", function () {
+                    window.location.hash = $(this).data("href");
+            });
+        });
+
+
+    </script>
+
+
+</body>
+</html>

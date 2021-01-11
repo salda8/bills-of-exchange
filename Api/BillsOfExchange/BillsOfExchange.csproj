@@ -22,12 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Client\src\store\billdetail\actions.ts" />
-    <None Remove="Client\src\store\billdetail\index.ts" />
-    <None Remove="Client\src\store\billdetail\reducer.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Data\BillsOfExchange.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

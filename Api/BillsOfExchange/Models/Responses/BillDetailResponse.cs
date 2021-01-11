@@ -8,8 +8,8 @@ namespace BillsOfExchange.Models.Responses
 {
     public class BillDetailResponse
     {
-        public IEnumerable<Endorsement> Endorsements { get; set; }
-        public BillOfExchange Bill { get; set; }
+        public IEnumerable<Endo> Endorsements { get; set; }
+        public BillDetail Bill { get; set; }
 
         public Party Beneficary { get; set; }
 

@@ -10,7 +10,7 @@ namespace BillsOfExchange.DataProvider.Facades
     public class EndoFacade : EndorsementRepository, IEndoFacade
     {
 
-        public IEnumerable<Endorsement> GetByBill(BillOfExchange bill)
+        public IEnumerable<Endo> GetByBill(BillOfExchange bill)
         {
             if (bill == null)
                 throw new ArgumentException("bill is empty", "bill");
@@ -32,13 +32,38 @@ namespace BillsOfExchange.DataProvider.Facades
             if (duplicity.Count() > 1)
                 throw new ModelDataException("Řad rubopisů pro směnku Id=10 obsahuje 2x rupobis s null předchozím (Id=5 a Id=10).", duplicity.First());
 
-            return endos;
+            var pf = new PartyFacade();
+
+
+            return from a in endos
+                   join b in pf.GetByIds(endos.Select(c => c.NewBeneficiaryId).ToArray()) on a.NewBeneficiaryId equals b.Id
+                   orderby a.Id
+                   select new Endo
+                   {
+                       Bene = b,
+                       Id = a.Id,
+                       BillId = a.BillId,
+                       NewBeneficiaryId = a.NewBeneficiaryId,
+                       PreviousEndorsementId = a.PreviousEndorsementId,
+                   };
+
 
         }
 
-        public IEnumerable<Endorsement> GetByOwner(int ownerId)
+        public IEnumerable<Endo> GetByOwner(int ownerId)
         {
-            return _endorsements.Value.GroupBy(a => a.BillId).SelectMany(a => a.Where(b => b.Id == a.Max(c => c.Id))).Where(a=> a.NewBeneficiaryId == ownerId);
+            var pf = new PartyFacade();
+            return from aa in _endorsements.Value.GroupBy(a => a.BillId).SelectMany(a => a.Where(b => b.Id == a.Max(c => c.Id))).Where(a => a.NewBeneficiaryId == ownerId)
+                   join bb in pf.GetAll() on aa.NewBeneficiaryId equals bb.Id
+                   orderby aa.Id
+                   select new Endo
+                   {
+                       Bene = bb,
+                       Id = aa.Id,
+                       BillId = aa.BillId,
+                       NewBeneficiaryId = aa.NewBeneficiaryId,
+                       PreviousEndorsementId = aa.PreviousEndorsementId,
+                   };
         }
 
         public int[] GetAllBillsId()

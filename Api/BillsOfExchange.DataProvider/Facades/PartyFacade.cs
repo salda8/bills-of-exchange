@@ -18,5 +18,10 @@ namespace BillsOfExchange.DataProvider.Facades
         {
             return _parties.Value.Single(a => a.Id == id);
         }
+
+        public Party[] GetAll()
+        {
+            return _parties.Value;
+        }
     }
 }

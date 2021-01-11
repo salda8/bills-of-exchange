@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BillsOfExchange.DataProvider.Models
 {
-    public class BillInfo
+    public class BillGrid
     {
         public int BillId { get; set; }
         public int BillDrawerId { get; set; }

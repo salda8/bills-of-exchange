@@ -36,11 +36,15 @@ namespace BillsOfExchange.Controllers
             if (party == null)
                 return NotFound();
 
-            var detail = new PartyDetailResponse();
-            detail.Id = party.Id;
-            detail.Name = party.Name;
+            var detail = new PartyDetailResponse
+            {
+                Id = party.Id,
+                Name = party.Name,
+                Original = _repo.GetBillsByOwnerOriginally(partyId),
+                Actual = _repo.GetBillsByOwner(partyId)
+            };
 
-            return Ok();
+            return Ok(detail);
         }
     }
 }

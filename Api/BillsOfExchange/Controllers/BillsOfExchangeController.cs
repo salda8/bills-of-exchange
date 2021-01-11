@@ -69,7 +69,7 @@ namespace BillsOfExchange.Controllers
 
             var response = new BillsResponse
             {
-                Bills = _repo.GetBillsByOwner(ownerId, _repoEndo.GetByOwner(ownerId), _repoEndo.GetAllBillsId())
+                Bills = _repo.GetBillsByOwner(ownerId)
             };
 
             if (!response.Bills.Any())

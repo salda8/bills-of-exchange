@@ -10,8 +10,9 @@ namespace BillsOfExchange.DataProvider.Facades
     {
 
         IPagingList GetPageList(int page, int size);
-        BillOfExchange GetBill(int billId);
-        IEnumerable<BillOfExchange> GetBillsByDrawer(int drawerId);
-        IEnumerable<BillOfExchange> GetBillsByOwner(int ownerId, IEnumerable<Endorsement> endos = null, int[] allBillsIdFromEndo = null);
+        BillDetail GetBill(int billId);
+        IEnumerable<BillDetail> GetBillsByDrawer(int drawerId);
+        IEnumerable<BillDetail> GetBillsByOwner(int ownerId);
+        IEnumerable<BillDetail> GetBillsByOwnerOriginally(int ownerId);
     }
 }

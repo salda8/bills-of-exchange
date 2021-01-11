@@ -7,9 +7,9 @@ namespace BillsOfExchange.DataProvider.Facades
 {
     public interface IEndoFacade : IEndorsementRepository
     {
-        IEnumerable<Endorsement> GetByBill(BillOfExchange bill);
+        IEnumerable<Endo> GetByBill(BillOfExchange bill);
        
-        IEnumerable<Endorsement> GetByOwner(int ownerId);
+        IEnumerable<Endo> GetByOwner(int ownerId);
 
         int[] GetAllBillsId();
     }

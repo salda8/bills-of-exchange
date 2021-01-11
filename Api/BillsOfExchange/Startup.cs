@@ -39,7 +39,7 @@ namespace BillsOfExchange
             services.AddScoped(a => LogProxy<IBillFacade>.Instance(new BillFacade()));
             services.AddScoped(a => LogProxy<IEndoFacade>.Instance(new EndoFacade()));
 
-
+            services.AddSignalR();
             services.AddCorsConfig(_corsPolicyName);
             services.AddControllersWithViews();
             services.AddResponseCompressionConfig(Configuration);

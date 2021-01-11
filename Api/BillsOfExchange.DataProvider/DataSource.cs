@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BillsOfExchange.DataProvider
 {
-    public class DataSource
+    internal class DataSource
     {
         protected static readonly Lazy<Endorsement[]> _endorsements = new Lazy<Endorsement[]>(() =>
         {
@@ -28,7 +28,7 @@ namespace BillsOfExchange.DataProvider
             return JsonConvert.DeserializeObject<IEnumerable<BillOfExchange>>(json).OrderBy(item => item.Id).ToArray();
         });
 
-        public static IEnumerable<BillInfo> GetMain()
+        public static IEnumerable<BillGrid> GetBills()
         {
             var parties = _parties.Value;
             var endos = _endorsements.Value.GroupBy(a => a.BillId).SelectMany(a => a.Where(b => b.Id == a.Max(c => c.Id))).ToArray();
@@ -43,7 +43,7 @@ namespace BillsOfExchange.DataProvider
                          from o in j.DefaultIfEmpty()
                          join b in parties on a.DrawerId equals b.Id
                          join c in parties on a.BeneficiaryId equals c.Id
-                         select new BillInfo
+                         select new BillGrid
                          {
                              BillId = a.Id,
                              BillDrawerId = a.DrawerId,
@@ -56,13 +56,6 @@ namespace BillsOfExchange.DataProvider
                              EndoBeneficiaryName = n.Name,
                              EndoCount = o.Count
                          };
-        }
-
-        
-
-            public class PartyInfo
-        {
-
         }
     }
 

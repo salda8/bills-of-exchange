@@ -13,12 +13,31 @@ namespace BillsOfExchange.DataProvider.Facades
 
         public IPagingList GetPageList(int page, int size)
         {
-            return PagingList<BillOfExchange>.ToPagingdList(_billsOfExchange.Value.AsQueryable(), page, size);
+            return PagingList<BillGrid>.ToPagingdList(DataSource.GetBills().OrderBy(a=> a.BillId).AsQueryable(), page, size);
         }
 
-        public BillOfExchange GetBill(int billId)
+        public  IEnumerable<BillDetail> All()
         {
-            var bill =_billsOfExchange.Value.SingleOrDefault(a => a.Id == billId);
+            var fp = new PartyFacade();
+            return from a in _billsOfExchange.Value
+                   join b in fp.GetAll() on a.BeneficiaryId equals b.Id
+                   join c in fp.GetAll() on a.DrawerId equals c.Id
+                   orderby a.Id
+                   select new BillDetail
+                   {
+                       Amount = a.Amount,
+                       Id = a.Id,
+                       BeneficiaryId = a.BeneficiaryId,
+                       BeneName = b.Name,
+                       DrawerId = a.DrawerId,
+                       DrawerName = c.Name
+
+                   };
+        }
+
+        public BillDetail GetBill(int billId)
+        {
+            var bill = All().SingleOrDefault(a => a.Id == billId);
             if (bill == null) return null;
 
             if (bill.BeneficiaryId == bill.DrawerId)
@@ -27,22 +46,42 @@ namespace BillsOfExchange.DataProvider.Facades
             return bill;
         }
 
-        public IEnumerable<BillOfExchange> GetBillsByDrawer(int drawerId)
+        public IEnumerable<BillDetail> GetBillsByDrawer(int drawerId)
         {
-            return _billsOfExchange.Value.Where(a => a.DrawerId == drawerId).OrderBy(a => a.Id);
+            return All().Where(a => a.DrawerId == drawerId);
         }
 
 
-        //todo do jineho objektu
-        public IEnumerable<BillOfExchange> GetBillsByOwner(int ownerId, IEnumerable<Endorsement> ownEndos = null, int[] allBillsIdFromEndo = null)
+        public IEnumerable<BillDetail> GetBillsByOwner(int ownerId)
         {
             var bills = _billsOfExchange.Value.Where(a => a.BeneficiaryId == ownerId).OrderBy(a => a.Id).ToList();
-            if (ownEndos == null || allBillsIdFromEndo == null)
-                return bills;
+            var fp = new PartyFacade();
+            var fo = new EndoFacade();
+
+            var ownEndos = fo.GetByOwner(ownerId);
+            var allBillsIdFromEndo = fo.GetAllBillsId();
 
             bills.RemoveAll(a => allBillsIdFromEndo.Contains(a.Id));
             bills.AddRange(GetByIds(ownEndos.Select(a => a.BillId).ToArray()));
-            return bills;
+            return from a in bills
+                   join b in fp.GetAll() on a.BeneficiaryId equals b.Id
+                   join c in fp.GetAll() on a.DrawerId equals c.Id
+                   orderby a.Id
+                   select new BillDetail
+                   {
+                       Amount = a.Amount,
+                       Id = a.Id,
+                       BeneficiaryId = a.BeneficiaryId,
+                       BeneName = b.Name,
+                       DrawerId = a.DrawerId,
+                       DrawerName = c.Name
+
+                   };
+        }
+
+        public IEnumerable<BillDetail> GetBillsByOwnerOriginally(int ownerId)
+        {
+            return All().Where(a => a.BeneficiaryId == ownerId);
         }
 
     }

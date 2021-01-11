@@ -5,7 +5,7 @@ class PartyService extends BaseService {
     private static _service: PartyService;
     private static _controllerName: string = 'Party';
 
-    private constructor(controllerName: string) {
+    public constructor(controllerName: string) {
         super(controllerName);
     }
 

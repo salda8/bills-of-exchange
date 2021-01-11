@@ -8,7 +8,7 @@ namespace BillsOfExchange.Models.Responses
 {
     public class PartyDetailResponse : Party
     {
-        public IEnumerable<BillOfExchange> Original { get; set; }
-        public IEnumerable<BillOfExchange> Actual { get; set; }
+        public IEnumerable<BillDetail> Original { get; set; }
+        public IEnumerable<BillDetail> Actual { get; set; }
     }
 }
