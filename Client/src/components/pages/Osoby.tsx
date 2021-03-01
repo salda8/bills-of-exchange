@@ -4,8 +4,8 @@ import {useHistory} from "react-router-dom";
 
 const columns: GridColDef[] = [
     {field: 'id', headerName: 'ID', width: 70},
-    {field: 'name', headerName: 'Jméno', width: 130},
-    {field: 'email', headerName: 'Email', width: 130},
+    {field: 'name', headerName: 'Jméno', width: 230},
+    {field: 'email', headerName: 'Email', width: 230},
 ];
 
 const rows = [
