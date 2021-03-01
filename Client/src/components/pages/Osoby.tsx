@@ -1,51 +1,34 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import * as React from 'react';
+import {DataGrid, GridColDef, GridRowParams} from '@material-ui/data-grid';
+import {useHistory} from "react-router-dom";
 
-const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    },
-});
-
-function createData(name: string, mail: string) {
-    return {name, mail};
-}
+const columns: GridColDef[] = [
+    {field: 'id', headerName: 'ID', width: 70},
+    {field: 'name', headerName: 'Jméno', width: 130},
+    {field: 'email', headerName: 'Email', width: 130},
+];
 
 const rows = [
-    createData('Jan Novotny', 'jan.novotny@gmail.com'),
-    createData('Petr Cech', 'petr.cech@gmail.com'),
+    {id: 1, name: 'Snow Jon', email: 'test@gmail.com'},
+    {id: 2, name: 'Lannister Cersei', email: 'test@gmail.com'},
+    {id: 3, name: 'Lannister Jaime', email: 'test@gmail.com'},
+    {id: 4, name: 'Stark Arya', email: 'test@gmail.com'},
+    {id: 5, name: 'Targaryen Daenerys', email: 'test@gmail.com'},
+    {id: 6, name: 'Meli Sandre', email: 'test@gmail.com'},
+    {id: 7, name: 'Clifford Ferrara', email: 'test@gmail.com'},
+    {id: 8, name: 'Frances Rossini', email: 'test@gmail.com'},
+    {id: 9, name: 'Roxie Harvey', email: 'test@gmail.com'},
 ];
 
 export default function Osoby() {
-    const classes = useStyles();
+    let history = useHistory();
 
     return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Jméno</TableCell>
-                        <TableCell align="right">Mail</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="right">{row.mail}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <div style={{width: '100%'}}>
+            <DataGrid rows={rows} columns={columns} pageSize={5} autoHeight={true}
+                      onRowClick={(param: GridRowParams) => {
+                          history.push(`/osoby/${param.getValue('id')}`)
+                      }}/>
+        </div>
     );
 }
