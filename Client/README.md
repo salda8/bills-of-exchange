@@ -1,37 +1,46 @@
-# Směnky Client
+# Getting Started with Create React App
 
-Vaším úkolem je dokončit vytvořit klientskou aplikaci. Pro spouštění použijte zde připravený webpack dev server nebo obdobný nástroj (neřešte BE část klientské aplikace).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Klientská aplikace musí umožnit následující:
+## Available Scripts
 
-Navigace:
+In the project directory, you can run:
 
-- Zvolit si ze seznamu danou osobu (ideálně stránkovaně)
-- Zvolit si ze seznamu danou směnku (ideálně stránkovaně)
+### `yarn start`
 
-Detail osoby:
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- Vypsat všechny směnky, které daná osoba vystavila
-- Vypsat všechny směnky, které daná osoba právě vlastní (tj. je první v řadu)
-- Proklik na detail směnky skrze danou směnku
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-Detail směnky:
+### `yarn test`
 
-- Zobrazit směnce jako takové (vystavitel, první vlastník a současný vlastník)
-- Zobrazit kompletní řad směnky (tj. všechny rubopisy jak jdou po sobě) **včetně jmen osob**
-- Proklik na detail soboy skrze zmíněnou osobu
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Aplikace by měl být schopná handlovat vyjímky vyhozené API serverem aniž by došlo k jejím pádu.
+### `yarn build`
 
-Na grafickém zpracování nezáleží. Použijte svojí oblíbenou knihovnu, vlastní stylování, nebo použite nenastylované elementy. **Pokud řešíte pouze klientskou část s placeholder daty, záleží i na grafickém zpracování.**
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-**Bonusové body:**
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-- Použít TypeScript
-- Použít React
-- Pokrýt kód unit testy
-- Zajistit aby při opuštění a návratu mohl uživatel pokračovat tam, kde skončil
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Co zde již je
+### `yarn eject`
 
-Je zde připravený webpack dev server a příkaz `npm run start`.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
