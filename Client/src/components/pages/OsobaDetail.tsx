@@ -3,7 +3,7 @@ import {DataGrid, GridColDef, GridRowParams} from '@material-ui/data-grid';
 import {useHistory, useParams} from "react-router-dom";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {osobaDetailActions, osobyActions} from "../../actions";
+import {osobaDetailActions} from "../../actions";
 
 
 const columns: GridColDef[] = [
@@ -23,7 +23,7 @@ export default function OsobaDetail() {
 
     useEffect(() => {
         dispatch({type: osobaDetailActions.OSOBA_DETAIL_LOAD, payload: {id: params.id}});
-    }, [dispatch]);
+    }, [dispatch, params]);
 
 
     return (

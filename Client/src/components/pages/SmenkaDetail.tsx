@@ -1,15 +1,9 @@
 import * as React from 'react';
-import {GridColDef,} from '@material-ui/data-grid';
 import {useParams, Link} from "react-router-dom";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {smenkaDetailActions} from "../../actions";
 import {Osoba} from "../../reducers/smenkaDetail";
-
-const columns: GridColDef[] = [
-    {field: 'id', headerName: 'ID', width: 70},
-    {field: 'name', headerName: 'Jméno', width: 230},
-];
 
 export default function SmenkaDetail() {
     const dispatch = useDispatch();
@@ -23,14 +17,14 @@ export default function SmenkaDetail() {
 
     useEffect(() => {
         dispatch({type: smenkaDetailActions.SMENKA_DETAIL_LOAD, payload: {id: params.id}});
-    }, [dispatch]);
+    }, [dispatch, params]);
 
 
     return (
         <div style={{width: '100%'}}>
-            <h2>První vlastník:  <Link to={`/osoby/${prvniVlastnik?.id}`}>{prvniVlastnik?.name}</Link></h2>
-            <h2>Současní vlastník:  <Link to={`/osoby/${soucasniVlastnik?.id}`}>{soucasniVlastnik?.name}</Link></h2>
-            <h2>Vystavitel:  <Link to={`/osoby/${vystavitel?.id}`}>{vystavitel?.name}</Link></h2>
+            <h2>První vlastník: <Link to={`/osoby/${prvniVlastnik?.id}`}>{prvniVlastnik?.name}</Link></h2>
+            <h2>Současní vlastník: <Link to={`/osoby/${soucasniVlastnik?.id}`}>{soucasniVlastnik?.name}</Link></h2>
+            <h2>Vystavitel: <Link to={`/osoby/${vystavitel?.id}`}>{vystavitel?.name}</Link></h2>
             <h2>Řad: {rad.map(o => <Link to={`/osoby/${o?.id}`}>{o?.name} &gt; </Link>)}</h2>
         </div>
     );
