@@ -4,12 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter as Router} from "react-router-dom";
+import {Provider} from 'react-redux';
+import {createStore} from "redux";
+import mainReducer from './reducers/index'
+
+const enableReduxDevTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__();
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router>
-            <App/>
-        </Router>
+        <Provider store={createStore(mainReducer, enableReduxDevTools)}>
+            <Router>
+                <App/>
+            </Router>
+        </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );
