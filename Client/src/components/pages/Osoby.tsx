@@ -2,7 +2,7 @@ import * as React from 'react';
 import {DataGrid, GridColDef, GridRowParams} from '@material-ui/data-grid';
 import {useHistory} from "react-router-dom";
 import {useEffect} from "react";
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux';
 import {osobyActions} from "../../actions";
 
 const columns: GridColDef[] = [
@@ -12,22 +12,22 @@ const columns: GridColDef[] = [
 ];
 
 export default function Osoby() {
-    let history = useHistory();
+    const history = useHistory();
 
     const dispatch = useDispatch();
 
     const osoby = useSelector((state: any) => state.osoby);
 
     useEffect(() => {
-        dispatch({type: osobyActions.OSOBY_LOAD})
-    }, [])
+        dispatch({type: osobyActions.OSOBY_LOAD});
+    }, []);
 
 
     return (
         <div style={{width: '100%'}}>
             <DataGrid rows={osoby} columns={columns} pageSize={5} autoHeight={true}
                       onRowClick={(param: GridRowParams) => {
-                          history.push(`/osoby/${param.getValue('id')}`)
+                          history.push(`/osoby/${param.getValue('id')}`);
                       }}/>
         </div>
     );

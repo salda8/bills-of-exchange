@@ -1,5 +1,5 @@
 import React from "react";
-import actions from '../actions/osoby'
+import actions from '../actions/osoby';
 
 export default function osobyReducer(state = [], action: any) {
     switch (action.type) {
@@ -14,7 +14,7 @@ export default function osobyReducer(state = [], action: any) {
                 {id: 7, name: 'Clifford Ferrara', email: 'test@gmail.com'},
                 {id: 8, name: 'Frances Rossini', email: 'test@gmail.com'},
                 {id: 9, name: 'Roxie Harvey', email: 'test@gmail.com'},
-            ]
+            ];
         }
     }
     return state;

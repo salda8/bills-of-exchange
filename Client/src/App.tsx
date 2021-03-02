@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function PermanentDrawerLeft() {
     const classes = useStyles();
-    let {pathname} = useLocation();
+    const {pathname} = useLocation();
 
     return (
         <div className={classes.root}>
