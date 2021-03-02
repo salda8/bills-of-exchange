@@ -10,11 +10,11 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import {Switch, Route, Link} from 'react-router-dom'
+import {Switch, Route, Link} from 'react-router-dom';
 import Osoby from "./components/pages/Osoby";
 import Smenky from "./components/pages/Smenky";
 import {useLocation} from "react-router-dom";
+import {Description, Person} from "@material-ui/icons";
 
 const drawerWidth = 240;
 
@@ -71,11 +71,11 @@ export default function PermanentDrawerLeft() {
                 <Divider/>
                 <List>
                     <ListItem button key={'Osoby'} component={Link} to='/'>
-                        <ListItemIcon> <MailIcon/> </ListItemIcon>
+                        <ListItemIcon> <Person/> </ListItemIcon>
                         <ListItemText primary={'Osoby'}/>
                     </ListItem>
                     <ListItem button key={'Směnky'} component={Link} to='/smenky'>
-                        <ListItemIcon> <MailIcon/> </ListItemIcon>
+                        <ListItemIcon> <Description/> </ListItemIcon>
                         <ListItemText primary={'Směnky'}/>
                     </ListItem>
                 </List>

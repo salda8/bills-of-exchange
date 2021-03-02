@@ -20,7 +20,7 @@ export default function Osoby() {
 
     useEffect(() => {
         dispatch({type: osobyActions.OSOBY_LOAD});
-    }, []);
+    }, [dispatch]);
 
 
     return (

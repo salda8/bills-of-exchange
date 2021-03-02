@@ -1,4 +1,3 @@
-import React from "react";
 import actions from '../actions/osoby';
 
 export default function osobyReducer(state = [], action: any) {
