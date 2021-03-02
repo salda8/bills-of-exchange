@@ -1,18 +1,25 @@
 import actions from '../actions/osoby';
+import {Action} from "../types/action";
 
-export default function osoby(state = [], action: any) {
+export interface Osoba {
+    id: string;
+    name: string;
+    email: string;
+}
+
+export default function osoby(state: Osoba[] = [], action: Action) {
     switch (action.type) {
         case actions.OSOBY_LOAD: {
             return [
-                {id: 1, name: 'Snow Jon', email: 'test@gmail.com'},
-                {id: 2, name: 'Lannister Cersei', email: 'test@gmail.com'},
-                {id: 3, name: 'Lannister Jaime', email: 'test@gmail.com'},
-                {id: 4, name: 'Stark Arya', email: 'test@gmail.com'},
-                {id: 5, name: 'Targaryen Daenerys', email: 'test@gmail.com'},
-                {id: 6, name: 'Meli Sandre', email: 'test@gmail.com'},
-                {id: 7, name: 'Clifford Ferrara', email: 'test@gmail.com'},
-                {id: 8, name: 'Frances Rossini', email: 'test@gmail.com'},
-                {id: 9, name: 'Roxie Harvey', email: 'test@gmail.com'},
+                {id: 1, name: 'Osoba 1', email: 'test@gmail.com'},
+                {id: 2, name: 'Osoba 2', email: 'test@gmail.com'},
+                {id: 3, name: 'Osoba 3', email: 'test@gmail.com'},
+                {id: 4, name: 'Osoba 4', email: 'test@gmail.com'},
+                {id: 5, name: 'Osoba 5', email: 'test@gmail.com'},
+                {id: 6, name: 'Osoba 6', email: 'test@gmail.com'},
+                {id: 7, name: 'Osoba 7', email: 'test@gmail.com'},
+                {id: 8, name: 'Osoba 8', email: 'test@gmail.com'},
+                {id: 9, name: 'Osoba 9', email: 'test@gmail.com'},
             ];
         }
     }

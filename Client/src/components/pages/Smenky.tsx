@@ -26,7 +26,7 @@ export default function Smenky() {
         <div style={{width: '100%'}}>
             <DataGrid rows={smenky} columns={columns} pageSize={5} autoHeight={true}
                       onRowClick={(param: GridRowParams) => {
-                          history.push(`/osoby/${param.getValue('id')}`);
+                          history.push(`/smenky/${param.getValue('id')}`);
                       }}/>
         </div>
     );

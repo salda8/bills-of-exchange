@@ -13,6 +13,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {Switch, Route, Link} from 'react-router-dom';
 import Osoby from "./components/pages/Osoby";
 import Smenky from "./components/pages/Smenky";
+import OsobaDetail from "./components/pages/OsobaDetail";
+import SmenkaDetail from "./components/pages/SmenkaDetail";
 import {useLocation} from "react-router-dom";
 import {Description, Person} from "@material-ui/icons";
 
@@ -55,7 +57,9 @@ export default function PermanentDrawerLeft() {
                 <Toolbar>
                     <Typography variant="h6" noWrap>
                         {(pathname === '/' || pathname === '/osoby') && 'Osoby'}
-                        {(pathname === '/smenky') && 'Směnky'}
+                        {pathname === '/smenky' && 'Směnky'}
+                        {pathname.startsWith('/osoby/') && 'Osoba'}
+                        {pathname.startsWith('/smenky/') && 'Směnka'}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -86,6 +90,8 @@ export default function PermanentDrawerLeft() {
                     <Route exact path="/" component={Osoby}/>
                     <Route exact path="/osoby" component={Osoby}/>
                     <Route exact path="/smenky" component={Smenky}/>
+                    <Route exact path="/osoby/:id" component={OsobaDetail}/>
+                    <Route exact path="/smenky/:id" component={SmenkaDetail}/>
                 </Switch>
             </main>
         </div>
