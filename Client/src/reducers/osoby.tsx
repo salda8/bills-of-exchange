@@ -1,6 +1,6 @@
 import actions from '../actions/osoby';
 
-export default function osobyReducer(state = [], action: any) {
+export default function osoby(state = [], action: any) {
     switch (action.type) {
         case actions.OSOBY_LOAD: {
             return [
