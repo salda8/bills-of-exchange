@@ -1,22 +1,12 @@
-import axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 
 export const http = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
 });
 
-http.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
-    return config;
-  },
-  (error: any) => Promise.reject(error)
-);
-
-http.interceptors.response.use(
-  (response: AxiosResponse) => response,
-  (error: any) => {
-    handleAxiosError(error);
-  }
-);
+export const onError = (error: AxiosError) => {
+  handleAxiosError(error);
+};
 
 const handleAxiosError = (error: AxiosError): void => {
   const message = {
@@ -34,4 +24,5 @@ const handleAxiosError = (error: AxiosError): void => {
     }
   }
   console.error(message);
+  throw message;
 };

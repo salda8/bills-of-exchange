@@ -1,16 +1,14 @@
 import { Box, makeStyles } from "@material-ui/core";
-import {
-  DataGrid,
-  GridColDef,
-  GridRowParams,
-  GridRowsProp,
-} from "@material-ui/data-grid";
+import { DataGrid, GridColDef, GridRowParams } from "@material-ui/data-grid";
+import { Query } from "@redux-requests/react";
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { http } from "../../api/api";
-import { BillOfExchangeWithCurrentOwner, Endorsement } from "../../models";
-import Error from "../Error/Error";
+import { fetchBill, fetchEndorsementsForBill } from "../../api/actions";
+import { GET_BILL, GET_ENDORSEMENTS_FOR_BILL } from "../../api/constants";
+import ErrorComponent from "../Error/ErrorComponent";
 import { Wrapper } from "../index";
+import Spinner from "../Spinner/Spinner";
 
 const endorsementsColumns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -31,42 +29,15 @@ const useStyles = makeStyles({
 });
 
 const BillOfExchangeDetail: React.FC = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
   let { billId }: any = useParams();
-  const [
-    billEndorsements,
-    setBillEndorsementsRows,
-  ] = React.useState<GridRowsProp>([]);
-  const [
-    ownedBill,
-    setOwnedBill,
-  ] = React.useState<BillOfExchangeWithCurrentOwner>();
 
   useEffect(() => {
-    http.get("Endorsements", { params: { BillId: billId } }).then(
-      (response) => {
-        if (response && response.data) {
-          const result = response.data as Endorsement[];
-          if (result) {
-            setBillEndorsementsRows(result);
-          }
-        }
-      },
-      (x) => console.log(x)
-    );
-  }, [billId]);
-
-  useEffect(() => {
-    http.get(`BillsOfExchange/${billId}`).then((response) => {
-      if (response && response.data) {
-        const result = response.data as BillOfExchangeWithCurrentOwner;
-        if (result) {
-          setOwnedBill(result);
-        }
-      }
-    });
-  }, [billId]);
+    dispatch(fetchEndorsementsForBill(billId));
+    dispatch(fetchBill(billId));
+  }, [billId, dispatch]);
 
   function goToDetail(param: GridRowParams) {
     goToPartyDetail(param.row.newBeneficiaryId);
@@ -88,50 +59,64 @@ const BillOfExchangeDetail: React.FC = () => {
         data-testid="BillOfExchangeDetail"
       >
         <h3>Bill detail with current owner</h3>
-        {ownedBill ? (
-          <Box p={1} display="flex" flexDirection="column">
-            ID: {ownedBill.id}
-            <span>
-              {" "}
-              Drawer ID:{" "}
-              <span
-                className={classes.root}
-                onClick={() => goToPartyDetail(ownedBill.drawerId)}
-              >
-                {ownedBill.drawerId}
-              </span>
-            </span>
-            <span>
-              {" "}
-              Beneficiary ID:{" "}
-              <span
-                className={classes.root}
-                onClick={() => goToPartyDetail(ownedBill.beneficiaryId)}
-              >
-                {ownedBill.beneficiaryId}
-              </span>
-            </span>
-            <span>
-              {" "}
-              Owner Name:{" "}
-              <span
-                className={classes.root}
-                onClick={() => goToPartyDetail(ownedBill.ownerId)}
-              >
-                {ownedBill.ownerName}
-              </span>
-            </span>
-          </Box>
-        ) : (
-          <Error error="ERROR: Data for this bill are either invalid or missing" />
-        )}
+        <Query
+          type={GET_BILL}
+          errorComponent={ErrorComponent}
+          loadingComponent={Spinner}
+          noDataMessage={<p>There is no entity currently.</p>}
+        >
+          {({ data }) => {
+            return (
+              <Box p={1} display="flex" flexDirection="column">
+                ID: {data.id}
+                <span>
+                  {" "}
+                  Drawer ID:{" "}
+                  <span
+                    className={classes.root}
+                    onClick={() => goToPartyDetail(data.drawerId)}
+                  >
+                    {data.drawerId}
+                  </span>
+                </span>
+                <span>
+                  Beneficiary ID:
+                  <span
+                    className={classes.root}
+                    onClick={() => goToPartyDetail(data.beneficiaryId)}
+                  >
+                    {data.beneficiaryId}
+                  </span>
+                </span>
+                <span>
+                  {" "}
+                  Owner Name:{" "}
+                  <span
+                    className={classes.root}
+                    onClick={() => goToPartyDetail(data.ownerId)}
+                  >
+                    {data.ownerName}
+                  </span>
+                </span>
+              </Box>
+            );
+          }}
+        </Query>
         <Box p={1} style={{ height: 400, width: "100%" }}>
           <h3>Endorsements for bill</h3>
-          <DataGrid
-            rows={billEndorsements}
-            columns={endorsementsColumns}
-            onRowClick={goToDetail}
-          />
+          <Query
+            type={GET_ENDORSEMENTS_FOR_BILL}
+            errorComponent={ErrorComponent}
+            loadingComponent={Spinner}
+          >
+            {({ data }) => (
+              <DataGrid
+                rows={data}
+                columns={endorsementsColumns}
+                onRowClick={goToDetail}
+              />
+            )}
+          </Query>
         </Box>
       </Box>
     </Wrapper>

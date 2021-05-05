@@ -1,15 +1,22 @@
 import { Box } from "@material-ui/core";
-import {
-  DataGrid,
-  GridColDef,
-  GridRowParams,
-  GridRowsProp,
-} from "@material-ui/data-grid";
+import { DataGrid, GridColDef, GridRowParams } from "@material-ui/data-grid";
+import { Query } from "@redux-requests/react";
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { http } from "../../api/api";
-import { BillOfExchange, PartyDto } from "../../models";
+import {
+  fetchIssuedBillsBy,
+  fetchOwnedBillsBy,
+  fetchParty,
+} from "../../api/actions";
+import {
+  GET_ISSUED_BILLS_BY,
+  GET_OWNED_BILLS_BY,
+  GET_PARTY,
+} from "../../api/constants";
+import ErrorComponent from "../Error/ErrorComponent";
 import { Wrapper } from "../index";
+import Spinner from "../Spinner/Spinner";
 
 const billColumns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -19,51 +26,21 @@ const billColumns: GridColDef[] = [
 ];
 
 const PartyDetail: React.FC = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   let { partyId }: any = useParams();
 
-  const [ownedBillsRows, setOwnedBillsRows] = React.useState<GridRowsProp>([]);
-  const [issuedBillsRows, setIssuedBillsRows] = React.useState<GridRowsProp>(
-    []
-  );
-  const [partyDetail, setPartyDetail] = React.useState<PartyDto>();
-
   useEffect(() => {
-    http
-      .get("BillsOfExchange/owned-by", { params: { ownerId: partyId } })
-      .then((groups) => {
-        if (groups) {
-          const result = groups.data as BillOfExchange[];
-          if (result) {
-            setOwnedBillsRows(result);
-          }
-        }
-      });
+    // dispatch(fetchOwnedBillsBy(partyId));
   }, [partyId]);
 
   useEffect(() => {
-    http.get(`Party/${partyId}`).then((groups) => {
-      if (groups) {
-        const result = groups.data as PartyDto;
-        if (result) {
-          setPartyDetail(result);
-        }
-      }
-    });
-  }, [partyId]);
+    dispatch(fetchParty(partyId));
+    dispatch(fetchOwnedBillsBy(partyId));
+    dispatch(fetchIssuedBillsBy(partyId));
+  }, [partyId, dispatch]);
 
-  useEffect(() => {
-    http
-      .get("BillsOfExchange/issued-by", { params: { drawerId: partyId } })
-      .then((response) => {
-        if (response && response.data) {
-          const result = response.data as BillOfExchange[];
-          if (result) {
-            setIssuedBillsRows(result);
-          }
-        }
-      });
-  }, [partyId]);
+  useEffect(() => {}, [partyId]);
 
   function goToDetail(param: GridRowParams) {
     history.push(`/bill-of-exchange/${param.id}`);
@@ -71,24 +48,48 @@ const PartyDetail: React.FC = () => {
 
   return (
     <Wrapper>
-      <Box p={1}>
-        <h2>Detail of {partyDetail?.name}</h2>
+      <Box p={1} data-testid="PartyDetail">
+        <Query
+          type={GET_PARTY}
+          errorComponent={ErrorComponent}
+          loadingComponent={Spinner}
+          noDataMessage={<p>Nothing to show</p>}
+        >
+          {({ data }) => <h2>Detail of {data.name}</h2>}
+        </Query>
         <Box display="flex" flexDirection="row" p={1} minHeight={400}>
           <Box p={1} flexGrow={1}>
             <h3>Owned bills</h3>
-            <DataGrid
-              rows={ownedBillsRows}
-              columns={billColumns}
-              onRowClick={goToDetail}
-            />
+            <Query
+              type={GET_OWNED_BILLS_BY}
+              errorComponent={ErrorComponent}
+              loadingComponent={Spinner}
+              noDataMessage={<p>Nothing to show</p>}
+            >
+              {({ data }) => (
+                <DataGrid
+                  rows={data}
+                  columns={billColumns}
+                  onRowClick={goToDetail}
+                />
+              )}
+            </Query>
           </Box>
           <Box p={1} flexGrow={1}>
             <h3>Issued bills</h3>
-            <DataGrid
-              rows={issuedBillsRows}
-              columns={billColumns}
-              onRowClick={goToDetail}
-            />
+            <Query
+              type={GET_ISSUED_BILLS_BY}
+              errorComponent={ErrorComponent}
+              noDataMessage={<p>Nothing to show</p>}
+            >
+              {({ data }) => (
+                <DataGrid
+                  rows={data}
+                  columns={billColumns}
+                  onRowClick={goToDetail}
+                />
+              )}
+            </Query>
           </Box>
         </Box>
       </Box>

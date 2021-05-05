@@ -4,36 +4,37 @@ import {
   GridColDef,
   GridPageChangeParams,
   GridRowParams,
-  GridRowsProp,
 } from "@material-ui/data-grid";
+import { useQuery } from "@redux-requests/react";
 import React, { useEffect } from "react";
-import { http } from "../../api/api";
+import { useDispatch } from "react-redux";
+import { fetchParties } from "../../api/actions";
 import { useHistory } from "react-router-dom";
-import { PagedResult, PartyDto } from "../../models";
+import { GET_PARTIES } from "../../api/constants";
+import Spinner from "../Spinner/Spinner";
 
 const Party: React.FC = () => {
+  const dispatch = useDispatch();
+  const { data, loading } = useQuery({ type: GET_PARTIES });
   const history = useHistory();
   const partyColumns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "name", headerName: "Name", width: 200 },
   ];
-  const [partyRows, setPartyRows] = React.useState<GridRowsProp>([]);
   const [page, setPage] = React.useState(0);
-  const [totalItems, setTotalItems] = React.useState(0);
+  const [parties, setParties] = React.useState([]);
+  const [itemCount, setItemCount] = React.useState(0);
 
   useEffect(() => {
-    http
-      .get("Party", { params: { Take: pageSize, Skip: page * pageSize } })
-      .then((response) => {
-        if (response && response.data) {
-          const result = response.data as PagedResult<PartyDto>;
-          if (result) {
-            setTotalItems(result.pager.totalItems);
-            setPartyRows(result.content);
-          }
-        }
-      });
-  }, [page]);
+    dispatch(fetchParties(pageSize, page * pageSize));
+  }, [page, dispatch]);
+
+  useEffect(() => {
+    if (data) {
+      setParties(data.content);
+      setItemCount(data.pager.totalItems);
+    }
+  }, [data]);
 
   const handlePageChange = (params: GridPageChangeParams) => {
     setPage(params.page);
@@ -48,19 +49,23 @@ const Party: React.FC = () => {
   return (
     <Box style={{ height: 400 }} flexGrow={1} data-testid="Party">
       <h2>Parties</h2>
-      <DataGrid
-        rows={partyRows}
-        columns={partyColumns}
-        disableMultipleSelection={true}
-        pagination
-        pageSize={pageSize}
-        rowCount={totalItems}
-        paginationMode="server"
-        onRowClick={goToDetail}
-        onPageChange={handlePageChange}
-      />
+      {!loading ? (
+        <DataGrid
+          rows={parties}
+          columns={partyColumns}
+          disableMultipleSelection={true}
+          pagination
+          page={page}
+          pageSize={pageSize}
+          rowCount={itemCount}
+          paginationMode="server"
+          onRowClick={goToDetail}
+          onPageChange={handlePageChange}
+        />
+      ) : (
+        <Spinner />
+      )}
     </Box>
   );
 };
-
 export default Party;
