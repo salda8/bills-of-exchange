@@ -1,8 +1,12 @@
+using BillsOfExchange.ServiceLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
+using Serilog;
 
 namespace BillsOfExchange
 {
@@ -15,10 +19,17 @@ namespace BillsOfExchange
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            }).SetCompatibilityVersion(CompatibilityVersion.Latest);
+
+            services.AddOpenApiDocument(configure => { configure.Title = "Bills of Exchange"; });
+            services.AddRepositories();
+            services.AddServices();
+            services.AddMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,14 +39,21 @@ namespace BillsOfExchange
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandlingMiddleware();
+            }
 
+            app.UseSwagger();
+            app.UseSerilogRequestLogging();
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    "default",
+                    "{controller}/{id?}"
+                );
             });
         }
     }

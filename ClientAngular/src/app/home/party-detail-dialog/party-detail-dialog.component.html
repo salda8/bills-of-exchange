@@ -1,0 +1,59 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title translate>Party detail</mat-card-title>
+    <div style="width: max-content">
+      <h4>Owned bills</h4>
+      <table style="width: 300px" mat-table [dataSource]="ownedBills">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell style="cursor: pointer" (click)="openBillOfExchangeDetail(row.id)" *matCellDef="let row">
+            {{ row.id }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="drawerId">
+          <th mat-header-cell *matHeaderCellDef>Drawer Id</th>
+          <td mat-cell *matCellDef="let row">{{ row.drawerId }}</td>
+        </ng-container>
+        <ng-container matColumnDef="beneficiaryId">
+          <th mat-header-cell *matHeaderCellDef>Beneficiary Id</th>
+          <td mat-cell *matCellDef="let row">{{ row.beneficiaryId }}</td>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <div style="width: max-content">
+      <h4>Issued bills</h4>
+      <table style="width: 300px" mat-table [dataSource]="issuedBills">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell style="cursor: pointer" (click)="openBillOfExchangeDetail(row.id)" *matCellDef="let row">
+            {{ row.id }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="drawerId">
+          <th mat-header-cell *matHeaderCellDef>drawerId</th>
+          <td mat-cell *matCellDef="let row">{{ row.drawerId }}</td>
+        </ng-container>
+        <ng-container matColumnDef="beneficiaryId">
+          <th mat-header-cell *matHeaderCellDef>beneficiaryId</th>
+          <td mat-cell *matCellDef="let row">{{ row.beneficiaryId }}</td>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>amount</th>
+          <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

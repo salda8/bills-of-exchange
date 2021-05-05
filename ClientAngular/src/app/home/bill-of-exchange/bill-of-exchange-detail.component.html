@@ -1,0 +1,48 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title translate>Bill of exchange detail</mat-card-title>
+    <div>
+      <h4>Bill detail with current owner</h4>
+      <div style="width: max-content; display: flex; flex-direction: column" *ngIf="billOfExchangeWithCurrentOwner">
+        <span>ID: {{ billOfExchangeWithCurrentOwner.id }}</span>
+        <span style="cursor: pointer" (click)="openPartyDetail(billOfExchangeWithCurrentOwner.drawerId)"
+          >DrawerId: {{ billOfExchangeWithCurrentOwner.drawerId }}</span
+        >
+        <span style="cursor: pointer" (click)="openPartyDetail(billOfExchangeWithCurrentOwner.beneficiaryId)"
+          >BeneficiaryId: {{ billOfExchangeWithCurrentOwner.beneficiaryId }}</span
+        >
+        <span>Amount: {{ billOfExchangeWithCurrentOwner.amount }}</span>
+        <span style="cursor: pointer" (click)="openPartyDetail(billOfExchangeWithCurrentOwner.ownerId)"
+          >OwnerName: {{ billOfExchangeWithCurrentOwner.ownerName }}</span
+        >
+      </div>
+    </div>
+    <div style="width: max-content">
+      <h4>Endorsements for bill</h4>
+      <table style="width: 600px" mat-table [dataSource]="endorsements">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="billId">
+          <th mat-header-cell *matHeaderCellDef>Bill ID</th>
+          <td mat-cell *matCellDef="let row">{{ row.billId }}</td>
+        </ng-container>
+        <ng-container matColumnDef="previousEndorsementId">
+          <th mat-header-cell *matHeaderCellDef>Previous Endorsement Id</th>
+          <td mat-cell *matCellDef="let row">{{ row.previousEndorsementId }}</td>
+        </ng-container>
+        <ng-container matColumnDef="newBeneficiary">
+          <th mat-header-cell *matHeaderCellDef>New Beneficiary</th>
+          <td mat-cell style="cursor: pointer" (click)="openPartyDetail(row.newBeneficiaryId)" *matCellDef="let row">
+            {{ row.newBeneficiary }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="endorsementsColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: endorsementsColumns"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

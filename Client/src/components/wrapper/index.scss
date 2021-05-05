@@ -1,0 +1,43 @@
+﻿@mixin flex($align, $justify) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin flex-row($wrap: wrap, $align: stretch, $justify: space-between) {
+  @include flex($align, $justify);
+  flex-flow: row $wrap;
+}
+
+@mixin flex-column($wrap: nowrap, $align: stretch, $justify: space-between) {
+  @include flex($align, $justify);
+  flex-flow: column $wrap;
+}
+
+.o-main {
+  width: 100%;
+  flex: 1;
+}
+
+.o-shell {
+  max-width: 75.125rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+
+  &--flex {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.o-wrapper {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}

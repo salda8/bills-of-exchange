@@ -1,3 +1,34 @@
+# Spuštění aplikace pro vývoj
+
+```
+yarn
+yarn start
+
+# nebo pres npm:
+# npm install
+# npm run start
+```
+
+Otevře se prohlížeč, aplikace běží na http://localhost:3000
+
+# Testy
+
+```
+yarn test
+# npm run test
+```
+
+# Build aplikace
+
+```
+yarn build
+# npm run build
+```
+
+výsledný build je ve složce `build`
+
+## Původní README:
+
 # Směnky Client
 
 Vaším úkolem je dokončit vytvořit klientskou aplikaci. Pro spouštění použijte zde připravený webpack dev server nebo obdobný nástroj (neřešte BE část klientské aplikace).
