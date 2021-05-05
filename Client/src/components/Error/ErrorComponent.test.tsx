@@ -1,14 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Error from "./Error";
+import ErrorComponent from "./ErrorComponent";
 
 describe("<Error />", () => {
   test("it should mount", () => {
-    render(<Error error={""} />);
-
-    const error = screen.getByTestId("Error");
-
-    expect(error).toBeInTheDocument();
+    const error = { status: 200 };
+    render(<ErrorComponent error={error} />);
+    expect(screen.getByTestId("Error")).toBeInTheDocument();
   });
 });

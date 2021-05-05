@@ -1,0 +1,7 @@
+export const GET_BILLS = "GET_BILLS";
+export const GET_BILL = "GET_BILL";
+export const GET_OWNED_BILLS_BY = "GET_OWNED_BILLS_BY";
+export const GET_ISSUED_BILLS_BY = "GET_ISSUED_BILLS_BY";
+export const GET_PARTY = "GET_PARTY";
+export const GET_PARTIES = "GET_PARTIES";
+export const GET_ENDORSEMENTS_FOR_BILL = "GET_ENDORSEMENTS_FOR_BILL";

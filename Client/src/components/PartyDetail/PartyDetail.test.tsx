@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
+import { Provider } from "react-redux";
+import { configureStore } from "../../store";
 import RenderWithRouter from "../../utils/render-with-router";
+import "@testing-library/jest-dom/extend-expect";
 import PartyDetail from "./PartyDetail";
 
 describe("<PartyDetail />", () => {
@@ -12,13 +15,15 @@ describe("<PartyDetail />", () => {
 
   test("it should mount", () => {
     render(
-      <RenderWithRouter>
-        <PartyDetail />
-      </RenderWithRouter>
+      <Provider store={configureStore()}>
+        <RenderWithRouter>
+          <PartyDetail />
+        </RenderWithRouter>
+      </Provider>
     );
 
     const element = screen.getByTestId("PartyDetail");
 
-    expect(element).toBeDefined();
+    expect(element).toBeInTheDocument();
   });
 });

@@ -1,7 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
+import { Provider } from "react-redux";
+import { configureStore } from "../../store";
 import RenderWithRouter from "../../utils/render-with-router";
 import BillOfExchangeDetail from "./BillOfExchangeDetail";
+import "@testing-library/jest-dom/extend-expect";
 
 describe("<BillOfExchangeDetail />", () => {
   beforeEach(() => {
@@ -12,13 +15,15 @@ describe("<BillOfExchangeDetail />", () => {
 
   test("it should mount", () => {
     render(
-      <RenderWithRouter>
-        <BillOfExchangeDetail />
-      </RenderWithRouter>
+      <Provider store={configureStore()}>
+        <RenderWithRouter>
+          <BillOfExchangeDetail />
+        </RenderWithRouter>
+      </Provider>
     );
 
     const element = screen.getByTestId("BillOfExchangeDetail");
 
-    expect(element).toBeDefined();
+    expect(element).toBeInTheDocument();
   });
 });
